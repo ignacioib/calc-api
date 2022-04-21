@@ -24,7 +24,20 @@ function init() {
     return Operation.sync();
 }
 
+async function insertOperation(a,b,operationType,result){
+    await Operation.create({
+        type: operationType,
+        args: {
+            a: a,
+            b: b,
+        },
+		creation: Date('now'),
+        result,
+    });
+}
+
 module.exports = {
     Operation,
     init,
+    insertOperation,
 };

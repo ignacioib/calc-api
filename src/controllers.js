@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { Operation } = require("./models.js");
+const { Operation, insertOperation } = require("./models.js");
 var db1 = require('./basededatos.js')
 
 router.get("/add/:a/:b", async function (req, res) {
@@ -10,15 +10,7 @@ router.get("/add/:a/:b", async function (req, res) {
     const b = Number(params.b);
     const result = a + b;
 
-    await Operation.create({
-        type: "ADD",
-        args: {
-            a: a,
-            b: b,
-        },
-		creation: Date('now'),
-        result,
-    });
+    await insertOperation(a,b,"ADD",result);
 
     return res.send({ result });
 });
@@ -28,7 +20,25 @@ router.get("/res/:a/:b", async function (req, res) {
 });
 
 router.get("/mul/:a/:b", async function (req, res) {
-    return res.send({ result: "No implementado" });
+    const params = req.params;
+    const a = Number(params.a);
+    const b = Number(params.b);
+    const result = a * b;
+
+    await insertOperation(a,b,"MUL",result);
+
+    return res.send({ result });
+});
+
+router.get("/pow/:a/:b", async function (req, res) {
+    const params = req.params;
+    const a = Number(params.a);
+    const b = Number(params.b);
+    const result = Math.pow(a, b);
+
+    await insertOperation(a,b,"POW",result);
+
+    return res.send({ result });
 });
 
 router.get("/div/:a/:b", async function (req, res) {
