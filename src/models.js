@@ -10,6 +10,10 @@ const Operation = db.define("Operation", {
         type: Sequelize.JSON,
         allowNull: false,
     },
+    creation: {
+        type: Sequelize.DATE,
+        allowNull: false,
+    },
     result: {
         type: Sequelize.DOUBLE,
         allowNull: false,
