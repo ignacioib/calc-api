@@ -49,10 +49,14 @@ router.get("/pow/:a/:b", async function (req, res) {
 });
 
 router.get("/div/:a/:b", async function (req, res) {
-    // Tener en cuenta division por 0
-    // Si b es 0 retornar "Error: div by 0"
+    const params = req.params;
+    const a = Number(params.a);
+    const b = Number(params.b);
+    const result = (b === 0) ? "Error: div by 0" : (a / b); 
 
-    return res.send({ result: "No implementado" });
+    await insertOperation(a,b,"DIV",result);
+
+    return res.send({ result });
 });
 
 router.get("/history", async function (req, res) {
