@@ -7,11 +7,12 @@ router.get("/add/:a/:b", async function (req, res) {
     const params = req.params;
     const a = Number(params.a);
     const b = Number(params.b);
-    const resultado = a + b;
 
-    await insertOperation(a,b,"ADD",resultado);
+    const resultante = a + b;
 
-    return res.send({ resultado });
+    await insertOperation(a,b,"ADD",resultante);
+
+    return res.send({ resultante });
 });
 
 router.get("/res/:a/:b", async function (req, res) {
